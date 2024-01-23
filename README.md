@@ -1,16 +1,22 @@
-# Starter folder
+# Analysis of Red Light Camera Distribution in Toronto
 
 ## Overview
 
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
-To use this folder, click the green "Code" button", then "Download ZIP". Move the downloaded folder to where you want to work on your own computer, and then modify it to suit.
+This repository contains a detailed analysis of Red Light Camera (RLC) distribution in Toronto. The goal is to understand the city's strategies in traffic management and road safety enhancements.
 
 ## File Structure
 
-The repo is structured as:
+The repository is organized as follows:
 
--   `input/data` contains the data sources used in analysis including the raw data.
--   `outputs/data` contains the cleaned dataset that was constructed.
--   `outputs/paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper. 
--   `scripts` contains the R scripts used to simulate, download and clean data.
+- `inputs/data`: This directory houses the raw data sourced from Open Data Toronto and the cleaned datasets prepared for analysis.
+- `outputs/data`: Here, you'll find the processed data and visualizations generated from the analysis, such as charts and maps.
+- `outputs/paper`: Contains the `paper.qmd`, which is the Quarto document for the final report, along with the `references.bib` file for bibliographic references. The compiled PDF report is also stored in this directory.
+- `scripts`: This folder includes the `main.qmd` script that details the data acquisition, cleaning, and analysis process.
+
+## How to Use This Repository
+
+To use this repository for analysis:
+
+1. Clone or download the ZIP file of this repository to your local machine.
+2. Run the `main.qmd` script in the `scripts`.
+3. The `paper.qmd` in the `outputs/paper` folder can be compiled to view the full report as a PDF.
