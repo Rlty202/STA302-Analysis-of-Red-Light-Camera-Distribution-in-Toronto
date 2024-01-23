@@ -1,0 +1,96 @@
+---
+title: "Analysis of Red Light Camera Distribution in Toronto"
+author: "Ravnit Lotay"
+format: pdf
+---
+
+#### Preamble ####
+# Purpose: Analyze and visualize the distribution of Red Light Cameras in Toronto using 
+# data from Open Data Toronto. The study aims to understand patterns in traffic enforcement 
+# and safety measures across different city districts.
+# Author: Ravnit Lotay
+# Email: ravnit.lotay@mail.utoronto.ca
+# Date: January 23rd, 2024
+# Prerequisites: R downloaded and setup
+
+```{r setup}
+# install.packages("opendatatoronto")
+# install.packages("ggplot2")
+# install.packages("sf")
+# install.packages("dplyr")
+# install.packages("tidyverse")
+# install.packages("lubridate")
+# install.packages("janitor")
+
+library(opendatatoronto)
+library(ggplot2)
+library(sf)
+library(dplyr)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+# Download the dataset from Open Data Toronto
+package_id <- "9fcff3e1-3737-43cf-b410-05acd615e27b" 
+resources <- list_package_resources(package_id)
+
+# Downloading the geoJson data
+geojson_resource <- filter(resources, tolower(format) == 'geojson')
+rlc_data_geojson <- filter(geojson_resource, row_number() == 1) %>% get_resource()
+write_sf(rlc_data_geojson, "./inputs/data/red_light_cameras.geojson")
+
+rlc_data <- st_read("./inputs/data/red_light_cameras.geojson")
+rlc_data_clean <- clean_names(rlc_data)
+
+# Filtering out incomplete records and focusing on entries with valid activation dates
+rlc_data_clean <- rlc_data_clean %>%
+  filter(!is.na(activation_date))
+
+# Extracting the year from activation dates for trend analysis
+rlc_data_clean <- rlc_data_clean %>%
+  mutate(activation_year = year(lubridate::ymd_hms(activation_date)))
+
+#write_sf(rlc_data_clean "./inputs/data/red_light_cameras_clean.geojson")
+
+# Count the number of cameras activated each year
+yearly_activation_counts <- rlc_data_clean %>%
+  group_by(activation_year) %>%
+  summarise(number_of_cameras = n())
+
+# Creating a bar graph
+yearly_activation_plot <- ggplot(yearly_activation_counts, aes(x = activation_year, y = number_of_cameras)) +
+  geom_col(fill = "blue") +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  labs(title = "Number of Red Light Cameras Activated Each Year in Toronto",
+       x = "Year",
+       y = "Number of Cameras Activated") +
+  theme_minimal()
+
+ggsave("./outputs/data/yearly_activation_plot.png", yearly_activation_plot, width = 10, height = 6)
+
+# Mapping the distribution of red light cameras in Toronto, still need a basemap but not sure how to get that
+spatial_distribution_plot <- ggplot(data = rlc_data_clean) +
+  geom_sf(color = "red", size = 1) +
+  labs(title = "Distribution of Red Light Cameras in Toronto",
+       subtitle = "Each point represents a camera location") +
+  theme_minimal()
+
+ggsave("./outputs/data/spatial_distribution_plot.png", spatial_distribution_plot, width = 10, height = 6)
+
+rlc_data_clean <- rlc_data_clean %>%
+  mutate(district_name = tolower(ward_1))
+
+district_camera_counts <- rlc_data_clean %>%
+  group_by(district_name) %>%
+  summarise(number_of_cameras = n()) %>%
+  arrange(desc(number_of_cameras))
+
+district_distribution_plot <- ggplot(district_camera_counts, aes(x = reorder(district_name, number_of_cameras), y = number_of_cameras)) +
+  geom_col(fill = "green") +
+  labs(title = "Distribution of Red Light Cameras by District in Toronto",
+       x = "District",
+       y = "Number of Cameras") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+ggsave("./outputs/data/district_distribution_plot.png", district_distribution_plot, width = 10, height = 6)

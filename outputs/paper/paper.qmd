@@ -1,0 +1,38 @@
+---
+title: "Strategic Deployment of Red Light Cameras in Toronto: Insights into Urban Traffic Management and Safety"
+author: 
+  - Ravnit Lotay
+thanks: "Code and data are available at: https://github.com/Rlty202/STA302-Paper1"
+date: today
+date-format: long
+abstract: "This study explores how Red Light Cameras (RLCs) are being used in Toronto to improve road safety. The study highlights the growing use of RLCs, their strategic placement across the city, and the different areas they cover."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(janitor)
+library(dplyr)
+library(opendatatoronto)
+library(ggplot2)
+library(sf)
+```
+
+
+# Introduction
+
+In recent years, Toronto has turned to technology, such as Red Light Cameras (RLCs), to make streets safer. This study dives into the data from Open Data Toronto to understand better how these cameras are being used to manage traffic and increase safety.
+
+The rest of this paper is set up as follows. @sec-data dives into the data and its sources.
+
+# Data {#sec-data}
+
+The dataset comes from Open Data Toronto and gives us detailed information about where and when RLCs were set up in the city. To make sure the analysis was on useful, the data was cleaned with tools such as janitor and dplyr.
+
+# Adding remainder
