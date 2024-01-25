@@ -21,6 +21,8 @@ format: pdf
 # install.packages("tidyverse")
 # install.packages("lubridate")
 # install.packages("janitor")
+# install.packages("rmarkdown")
+# Install with install.packages("knitr")
 
 library(opendatatoronto)
 library(ggplot2)

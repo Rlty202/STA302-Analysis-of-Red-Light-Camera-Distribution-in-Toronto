@@ -20,3 +20,7 @@ To use this repository for analysis:
 1. Clone or download the ZIP file of this repository to your local machine.
 2. Run the `main.qmd` script in the `scripts`.
 3. The `paper.qmd` in the `outputs/paper` folder can be compiled to view the full report as a PDF.
+
+## LLM Statement
+
+No LLMs were used for this analysis.
