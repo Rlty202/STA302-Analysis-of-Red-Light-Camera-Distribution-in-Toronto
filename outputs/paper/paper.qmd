@@ -2,20 +2,20 @@
 title: "Strategic Deployment of Red Light Cameras in Toronto: Insights into Urban Traffic Management and Safety"
 author: 
   - Ravnit Lotay
-thanks: "Code and data are available at: https://github.com/Rlty202/STA302-Paper1"
+thanks: "Code and data are available at: https://github.com/Rlty202/STA302-Analysis-of-Red-Light-Camera-Distribution-in-Toronto"
 date: today
 date-format: long
 abstract: "This study explores how Red Light Cameras (RLCs) are being used in Toronto to improve road safety. The study highlights the growing use of RLCs, their strategic placement across the city, and the different areas they cover."
 format: pdf
 number-sections: true
 bibliography: references.bib
+toc: true
 ---
 
 ```{r}
 #| include: false
 #| warning: false
 #| message: false
-
 library(tidyverse)
 library(janitor)
 library(dplyr)
@@ -25,14 +25,55 @@ library(sf)
 ```
 
 
+
 # Introduction
 
-In recent years, Toronto has turned to technology, such as Red Light Cameras (RLCs), to make streets safer. This study dives into the data from Open Data Toronto to understand better how these cameras are being used to manage traffic and increase safety.
+In recent years, Toronto has turned to technology, such as Red Light Cameras (RLCs), to make streets safer. This study utilizese data from Open Data Toronto to better understand how these cameras are being used to manage traffic and improve road safety.
 
-The rest of this paper is set up as follows. @sec-data dives into the data and its sources.
+The rest of this paper is set up as follows. Section 2 dives into the data and its sources. Section 3 provides an description of the analysis. Section 4 provides a discussion about the overal use and findings of the study. Section 5 provides the references used.
 
-# Data {#sec-data}
+# Data
 
-The dataset comes from Open Data Toronto and gives us detailed information about where and when RLCs were set up in the city. To make sure the analysis was on useful, the data was cleaned with tools such as janitor and dplyr.
+The dataset comes from Open Data Toronto [@OpenDataTorontoRLC] and gives us detailed information about where and when RLCs were set up in the city. To make sure the analysis was useful, the data was cleaned with libraries including janitor [@janitor] and dplyr.
 
-# Adding remainder
+## Annual Activation Trends
+
+First, 
+
+![Yearly Trends in RLC Activations](../data/yearly_activation_plot.png)
+
+The figure above shows that throughout the years, especially in the later 2010s and early 2020s, several RLCs are activated, highlighting the city's growing commitment to road safety through technological means.
+
+Second, 
+
+![district_distribution_plot](../data/district_distribution_plot.png)
+
+It is evident that areas such as Scarbourough north have the greatest number of cameras. From this, it can be determined that the mosy likely reason certain districts have employed RCLs are as a safety measure due to historical data, or as a preventative measure.
+
+Lastly,
+
+![spatial_distribution_plot](../data/spatial_distribution_plot.png)
+
+Acting as a confirmation for the district distribution plot, it is clear that certain areas employ RLCs at a much higher rate, and this could be due to either historical data involving crashes or individuals driving through, or simply as a preventative measure.
+
+# Analysis and Findings
+
+The observed trends in RLC deployment in Toronto reflect a focused strategy to enhance road safety. The increasing number of cameras, particularly in areas like Scarborough North, suggests a proactive approach, possibly influenced by historical traffic data or as a preventive measure to reduce accidents.
+
+# Discussion
+
+From the analysis, it is evident that the city of Toronto is purposefully employing RCLs as a safety measure for drivers and pedestrians as they believe they are an effective detterent to individuals that consistently drive through traffic lights. In a more practical sense, the increase in RLCs and their specific locations provides valuable insights into how the city of Toronto is tackling road safety and traffic issues. 
+
+Additionally, the distribution and increasing number of RLCs have direct implications for urban safety in Toronto. By placing these cameras in key areas, the city is likely seeing improvements in traffic behavior and a reduction in accidents. If effective, other cities may look into RLCs as a solution as well.
+
+\newpage
+
+# References
+
+[@opendatatoronto]
+[@ggplot2]
+[@sf]
+[@tidyverse]
+[@janitor]
+[@Rcore]
+[@OpenDataTorontoRLC]
